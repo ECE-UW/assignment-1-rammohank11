@@ -10,7 +10,6 @@ def adding_lines(a, dblines):
     street_node = re.findall(cmd_node, a)
     street_name = "".join(street_name)
     dblines[street_name] = street_node
-    print(dblines)
 
 def change_lines(c, dblines):
     cmd_name = '"(.*)"'
@@ -63,6 +62,6 @@ def main():
             pass
     sys.exit(0)
 
-
+    
 if __name__ == '__main__':
     main()
