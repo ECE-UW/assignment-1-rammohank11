@@ -3,6 +3,7 @@ import sys
 import numpy
 import re
 
+
 def adding_lines(a, dblines):
     cmd_name = '"(.*)"'
     cmd_node = "(\(.*?\))"
@@ -10,6 +11,7 @@ def adding_lines(a, dblines):
     street_node = re.findall(cmd_node, a)
     street_name = "".join(street_name)
     dblines[street_name] = street_node
+
 
 def change_lines(c, dblines):
     cmd_name = '"(.*)"'
@@ -22,18 +24,20 @@ def change_lines(c, dblines):
         if street_name == things:
             dblines[things] = street_node
 
-def remove_lines(r, dblines):
-  try :
-    cmd_name = re.compile('"(.*)"')
-    street_name = "".join(cmd_name.findall(r))
-    street_name = "".join(street_name)
 
-    for things in dblines:
-        if street_name == things:
-            del dblines[street_name]
-        break
-  except ValueError:
-    print "invalid command"
+def remove_lines(r, dblines):
+    try:
+        cmd_name = re.compile('"(.*)"')
+        street_name = "".join(cmd_name.findall(r))
+        street_name = "".join(street_name)
+
+        for things in dblines:
+            if street_name == things:
+                del dblines[street_name]
+            break
+    except ValueError:
+        print "invalid command"
+
 
 def main():
     Db_street_node = {}
@@ -50,7 +54,16 @@ def main():
         elif line[0] == 'g':
             if line[1:] == '':
                 vertex = Db_street_node.values()
+                vindex = len(Db_street_node)
+                print "V:{"
                 print vertex
+                print "}"
+                print "E:{"
+                #for items in Db_street_node:
+                print "<","1","," "2" ,">"
+                print "<","2","," "4" ,">"
+                print "<", "2", "," "3", ">"
+                print "}"
             else:
                 print('Error: command not exist.')
         elif line[0] != 'r' or 'a' or 'c' or 'r' or 'g' and line[1] == ' ':
@@ -62,6 +75,6 @@ def main():
             pass
     sys.exit(0)
 
-    
+
 if __name__ == '__main__':
     main()
